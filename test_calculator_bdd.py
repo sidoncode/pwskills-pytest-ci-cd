@@ -7,7 +7,6 @@ scenarios("calculator.feature")
 # ── Given steps ──
 @given(parsers.parse('I have the numbers {a:d} and {b:d}'), target_fixture="context")
 def set_numbers(a, b):
-    """Creates and returns the shared context dict."""
     return {"a": a, "b": b, "error": None, "result": None}
 
 # ── When steps ──
@@ -31,9 +30,9 @@ def when_divide(context):
         context["error"] = e
 
 # ── Then steps ──
-@then(parsers.parse('the result should be {expected:f}'))
+@then(parsers.parse('the result should be {expected:d}'))
 def check_result(context, expected):
-    assert context["result"] == pytest.approx(expected)
+    assert context["result"] == expected
 
 @then('a ValueError should be raised')
 def check_error(context):
