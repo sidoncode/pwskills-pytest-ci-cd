@@ -30,9 +30,9 @@ def when_divide(context):
         context["error"] = e
 
 # ── Then steps ──
-@then(parsers.parse('the result should be {expected:d}'))
+@then(parsers.parse('the result should be {expected:g}'))
 def check_result(context, expected):
-    assert context["result"] == expected
+    assert context["result"] == pytest.approx(expected)
 
 @then('a ValueError should be raised')
 def check_error(context):
